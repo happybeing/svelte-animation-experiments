@@ -1,5 +1,6 @@
 <script>
 import CrossfadeTodoExample from './CrossfadeTodoExample.svelte';
+import Playground from './Playground.svelte';
 </script>
 
 <style>
@@ -25,6 +26,6 @@ import CrossfadeTodoExample from './CrossfadeTodoExample.svelte';
 </style>
 
 <main>
-  <CrossfadeTodoExample />
+  <Playground />
 </main>
 
