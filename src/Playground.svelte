@@ -1,6 +1,6 @@
 <script>
 	import { quintOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
+	import { crossfade, fly, slide } from 'svelte/transition';
 
 	const [send, receive] = crossfade({
 		duration: d => Math.sqrt(d * 200),
@@ -50,42 +50,11 @@
 		todo.done = done;
 		remove(todo);
 		todos = todos.concat(todo);
-	}
-</script>
-
-<div class='board'>
-  <h1>Playground</h1>
+  }
   
-  <p>This was based on the <a href='https://svelte.dev/tutorial/deferred-transitions'>Deferred Transitions</a>
-  example from the Svelte API docs, but who knows what it is now!</p>
-	
-  <input
-		placeholder="what needs to be done?"
-		on:keydown={e => e.key === 'Enter' && add(e.target)}
-	>
-
-	<div class='left'>
-		<h2>todo</h2>
-		{#each todos.filter(t => !t.done) as todo (todo.id)}
-			<label in:receive="{{key: todo.id}}" out:send="{{key: todo.id}}">
-				<input type=checkbox on:change={() => mark(todo, true)}>
-				{todo.description}
-				<button on:click="{() => remove(todo)}">remove</button>
-			</label>
-		{/each}
-	</div>
-
-	<div class='right'>
-		<h2>done</h2>
-		{#each todos.filter(t => t.done) as todo (todo.id)}
-			<label class="done" in:receive="{{key: todo.id}}" out:send="{{key: todo.id}}">
-				<input type=checkbox checked on:change={() => mark(todo, false)}>
-				{todo.description}
-				<button on:click="{() => remove(todo)}">remove</button>
-			</label>
-		{/each}
-	</div>
-</div>
+  let visible = true;
+  let tray1out = false;
+</script>
 
 <style>
 	.board {
@@ -150,4 +119,109 @@
 	label:hover button {
 		opacity: 1;
 	}
+  
+  .container {
+    position: relative;
+    width: 50%;
+    height: 320px;
+    border: 1px solid black;
+  }
+
+  .contained {
+    position: absolute;
+    /* left: 0; */
+  }
+
+  .box {
+    width: 100%;
+    height: 145px; 
+    border: 1px solid black;
+  }
+
+  .bottom-right {
+    position: absolute;
+    bottom: 0px;
+    right: 2px;
+  }
+
+  .tray-0 {
+    position: absolute;
+    top: 0px;
+  }
+  .tray-1 {
+    position: absolute;
+    top: 23px;
+  }
 </style>
+
+<div class='container'>
+  <div class='contained box tray-1' style='transition: transform 0.8s;{tray1out ? 'transform: translate(0px, 125px);' : ''} background-color:red; '>
+    <div class='contained bottom-right'>
+      <input type="checkbox" bind:checked={tray1out} style='position:static;'>
+    </div>
+    <div class='contained' style='position: absolute; bottom: 0px;'>Tray 1</div>
+  </div>
+  <div class='contained box tray-0' style='background-color:green; '>
+    <!-- <div class='contained bottom-right'>
+      <input type="checkbox" bind:checked={trayXout} style='position:static;'>
+    </div> -->
+    <div class='contained' style='position: absolute; bottom: 0px;'>Tray 0</div>
+  </div>
+  <div class='contained' style='position: absolute; bottom: 0px;'>Tray Container</div>
+</div>
+
+<div class='container'>
+  {#if visible}
+    <div transition:slide="{{delay: 250, duration: 300, easing: quintOut }}">
+      slides in and out
+    </div>
+  {/if}
+</div>
+
+<div class='container'>
+  <div class='contained' style='background-color:green; '>A</div>
+  <div class='contained' style='background-color:red; '>B</div>
+  <div class='contained' style='background-color:blue; '>C</div>
+  {#each todos as todo}
+  <!-- position: relative; left: 10px, top: {todo.id * 100}px; -->
+  <div class='contained' id={todo.id} style='top: {todo.id * 100}px;'>
+  <p>{todo.description}</p>
+  </div>
+  {/each}
+</div>
+  
+	
+<div class='board'>
+  <h1>Playground</h1>
+  
+  <p>This was based on the <a href='https://svelte.dev/tutorial/deferred-transitions'>Deferred Transitions</a>
+  example from the Svelte API docs, but who knows what it is now!</p>
+	
+  <input
+		placeholder="what needs to be done?"
+		on:keydown={e => e.key === 'Enter' && add(e.target)}
+	>
+
+  <div class='left'>
+		<h2>todo</h2>
+		{#each todos.filter(t => !t.done) as todo (todo.id)}
+			<label in:receive="{{key: todo.id}}" out:send="{{key: todo.id}}">
+				<input type=checkbox on:change={() => mark(todo, true)}>
+				{todo.description}
+				<button on:click="{() => remove(todo)}">remove</button>
+			</label>
+		{/each}
+	</div>
+
+	<div class='right'>
+		<h2>done</h2>
+		{#each todos.filter(t => t.done) as todo (todo.id)}
+			<label class="done" in:receive="{{key: todo.id}}" out:send="{{key: todo.id}}">
+				<input type=checkbox checked on:change={() => mark(todo, false)}>
+				{todo.description}
+				<button on:click="{() => remove(todo)}">remove</button>
+			</label>
+		{/each}
+	</div>
+</div>
+
