@@ -2,6 +2,8 @@
 	import { quintOut } from 'svelte/easing';
 	import { crossfade, fly, slide } from 'svelte/transition';
 
+  import TrayButton from './TrayButton.svelte';
+
 	const [send, receive] = crossfade({
 		duration: d => Math.sqrt(d * 200),
 
@@ -154,6 +156,10 @@
   }
 </style>
 
+<div style='width: inherit; height=inherit;'>
+  <!-- <TrayButton width={20} height={20} fill='#98d02e' stroke='#65b81d' strokeWidth={5} pointDown={true} /> -->
+  <TrayButton width={20} height={20} fill='#b81d1d' stroke='#b81d1d' strokeWidth={5} pointDown={true} />
+</div>
 <div class='container'>
   <div class='contained box tray-1' style='transition: transform 0.8s;{tray1out ? 'transform: translate(0px, 125px);' : ''} background-color:red; '>
     <div class='contained bottom-right'>
