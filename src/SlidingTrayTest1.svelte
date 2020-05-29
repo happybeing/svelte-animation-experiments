@@ -39,7 +39,7 @@
   }
 </style>
 
-<h1>SlidingTray</h1>
+<h1>SlidingTrayTest1</h1>
 <div class='container'>
   <div class='contained box tray-1' style='transition: transform 0.8s;{tray1out ? 'transform: translate(0px, 125px);' : ''} background-color:red; '>
       <input class='contained bottom-right' type="checkbox" bind:checked={tray1out} >
