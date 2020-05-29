@@ -6,16 +6,16 @@ vice versa.
 
 -->
 <script>
-export let width = 12;
-export let height = 12;
+export let width;// = 14;
+export let height;// = 12;
 
 export let pointDown = true;
 
 // export let fill = '#98d02e';
 // export let stroke = '#65b81d';
 export let fill = '#65b81d';
-export let stroke = '#65b81d';
-export let strokeWidth = 2;
+export let stroke = '#ffd700';
+export let strokeWidth = 1;
 
 $: colourStyles = `fill: ${fill}; 
                     stroke: ${stroke}; 
@@ -33,10 +33,13 @@ $: triangleStyle = colourStyles + `
 <style>
 </style>
 
-<div style='width: inherit; height: inherit;'>
-  <svg style='width: inherit; height: inherit;'>
-    <polygon on:click={() => pointDown = !pointDown}
-      points='{strokeWidth},{-height/2}, {width+strokeWidth},{-height/2} {(width)/2+strokeWidth},{height/2}' 
+<div style="position: absolute; top: -2px; right: 0px; padding-right: 2px; height: {height+height/2+4}px;" on:click={() => pointDown = !pointDown}>
+  <svg width={width} height={height+height/2}>
+    <polygon
+      points='{strokeWidth},{-height/2}, {width},{-height/2} {(width+strokeWidth)/2},{height/2}' 
       style="{triangleStyle} transform: translate(0px, {height}px); transition: transform 0.8s;{pointDown ? '' : 'transform: translate(0px,' + height + 'px) rotateX(180deg)'}" />
+    <!-- <polygon on:click={() => pointDown = !pointDown}
+      points='{strokeWidth},{-height/2}, {width+strokeWidth},{-height/2} {(width)/2+strokeWidth},{height/2}' 
+      style="{triangleStyle} transform: translate(0px, {height}px); transition: transform 0.8s;{pointDown ? '' : 'transform: translate(0px,' + height + 'px) rotateX(180deg)'}" /> -->
   </svg>
 </div>

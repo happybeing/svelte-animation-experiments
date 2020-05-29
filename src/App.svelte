@@ -1,13 +1,16 @@
 <script>
-import CrossfadeTodoExample from './CrossfadeTodoExample.svelte';
-import SlidingTray from './SlidingTray.svelte';
+import Tray from './Tray.svelte';
+import TrayContainer from './TrayContainer.svelte';
 import TrayButton from './TrayButton.svelte';
+
+import CrossfadeTodoExample from './CrossfadeTodoExample.svelte';
+import SlidingTrayTest1 from './SlidingTrayTest1.svelte';
 import Playground from './Playground.svelte';
 </script>
 
 <style>
 	main {
-		text-align: center;
+		text-align: left;
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
@@ -29,7 +32,30 @@ import Playground from './Playground.svelte';
 </style>
 
 <main>
-  <Playground />
+  <!-- <Playground /> -->
   <!-- <TrayButton width={200} height={200}  /> -->
+
+  <h1>Demo of tray container</h1>
+  <p>Uses TrayContainer and Tray components (and the tray uses TrayButton).</p>
+  <p>Click the green triangles on the right to open or close the trays.</p>
+
+  <div style='width: inherit; height=inherit;'>
+    <TrayContainer>
+      <Tray>
+        <p>Here's something in the tray</p>
+        <p>Here's something in the tray</p>
+        <p>Here's something in the tray</p>
+        <p>Here's something in the tray</p>
+      </Tray>
+      <Tray>
+        More in this tray. <br/>
+        More in this tray. <br/>
+        More in this tray. <br/>
+        More in this tray. <br/>
+      </Tray>
+    </TrayContainer>
+  </div>
+  <p>Some content after the tray.</p>
+
 </main>
 
