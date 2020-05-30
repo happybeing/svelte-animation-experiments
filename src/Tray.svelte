@@ -1,7 +1,7 @@
 <script>
 import TrayButton from './TrayButton.svelte';
 
-let trayIn = true;
+export let trayIn = true;
 
 export let protrudingHeight = 24;
 export let buttonSize = protrudingHeight - 10;
@@ -12,8 +12,8 @@ let heightIn = protrudingHeight;
 let heightOut = height;
 let transitTime = '' + (height * 0.005) +'s';
 
-let trayInStyle = `height: ${protrudingHeight}px; transition: height  ${transitTime} ease-in`;
-let trayOutStyle = `height: ${heightOut}px; transition: height ${transitTime} ease-in`;
+$: trayInStyle = `height: ${protrudingHeight}px; transition: height  ${transitTime} ease-in; `;
+$: trayOutStyle = `height: ${heightOut}px; transition: height ${transitTime} ease-in; `;
 
 $: traySlideStyle = (trayIn ? trayInStyle : trayOutStyle) + trayStyle;
 </script>
