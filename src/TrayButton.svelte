@@ -31,8 +31,8 @@ $: triangleStyle = colourStyles + `
 <style>
 </style>
 
-// Note: including on:click without a handler forwards the event to the component so it can be handled by the component user
-<div style="position: absolute; top: -2px; right: 0px; padding-right: 2px; height: {height+height/2+4}px;" on:click on:click={() => {pointDown = !pointDown}>
+<!-- Note: including on:click without a handler forwards the event to the component so it can be handled by the component user -->
+<div style="position: absolute; top: -2px; right: 0px; padding-right: 2px; height: {height+height/2+4}px;" on:click on:click={() => pointDown = !pointDown}>
   <svg width={width} height={height+height/2}>
     <polygon
       points='{strokeWidth},{-height/2}, {width},{-height/2} {(width+strokeWidth)/2},{height/2}' 
