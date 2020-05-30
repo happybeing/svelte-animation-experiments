@@ -1,6 +1,6 @@
 <script>
 import Tray from './Tray.svelte';
-import TrayContainer from './TrayContainer.svelte';
+import TrayHolder from './TrayHolder.svelte';
 import TrayButton from './TrayButton.svelte';
 
 import CrossfadeTodoExample from './CrossfadeTodoExample.svelte';
@@ -36,11 +36,11 @@ import Playground from './Playground.svelte';
   <!-- <TrayButton width={200} height={200}  /> -->
 
   <h1>Demo of tray container</h1>
-  <p>Uses TrayContainer and Tray components (and the tray uses TrayButton).</p>
+  <p>Uses TrayHolder and Tray components (and the tray uses TrayButton).</p>
   <p>Click the green triangles on the right to open or close the trays.</p>
 
   <div style='width: inherit; height=inherit;'>
-    <TrayContainer>
+    <TrayHolder>
       <Tray>
         <p>Here's something in the tray</p>
         <p>Here's something in the tray</p>
@@ -53,7 +53,7 @@ import Playground from './Playground.svelte';
         More in this tray. <br/>
         More in this tray. <br/>
       </Tray>
-    </TrayContainer>
+    </TrayHolder>
   </div>
   <p>Some content after the tray.</p>
 

@@ -3,7 +3,7 @@
 	import { crossfade, fly, slide } from 'svelte/transition';
 
   import Tray from './Tray.svelte';
-  import TrayContainer from './TrayContainer.svelte';
+  import TrayHolder from './TrayHolder.svelte';
   import TrayButton from './TrayButton.svelte';
 
 	const [send, receive] = crossfade({
@@ -159,7 +159,7 @@
 </style>
 
 <div style='width: inherit; height=inherit;'>
-  <TrayContainer>
+  <TrayHolder>
     <Tray>
       <p>here's</p>
       <p>here's</p>
@@ -173,7 +173,7 @@
       more down here <br/>
       more down here <br/>
     </Tray>
-  </TrayContainer>
+  </TrayHolder>
 </div>
 
 <div style='width: inherit; height=inherit;'>
